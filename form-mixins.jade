@@ -1,0 +1,95 @@
+/**
+* Jade Mixins for bootstrap forms
+* Bootstrap v 3.0.0
+*
+* Tailored for use with express-form 
+*
+* Use example
+* -- 
+* var errors = req.form && req.form.getErrors() ||  {};
+* var values = req.body || {};
+* res.render('..register', { errors: errors, values: values });
+* --
+*/
+
+mixin field-label-xs(type, label, name, id)
+	- if ((typeof(errors) !== "undefined") && (errors[name])) {
+		.form-group(attributes)
+			label(for=name, class="col-md-2 control-label")= label
+			.col-xs-10.has-error
+				input(type=type, class="form-control", name=name, id=name, value=values[name] || "")
+				span.help-block #{errors[name].join(", ")}
+	- } else {
+		.form-group(attributes)
+			label(for=name, class="col-md-2 control-label")= label
+			.col-xs-10
+				input(type=type, class="form-control", name=name, id=name, value=values[name] || "")
+	- }
+
+mixin field-label-sm(type, label, name, id)
+	- if ((typeof(errors) !== "undefined") && (errors[name])) {
+		.form-group.has-error(attributes)
+			label(for=name, class="col-md-2 control-label")= label
+			.col-sm-10
+				input(type=type, class="form-control", name=name, id=name, value=values[name] || "")
+				span.help-block #{errors[name].join(", ")}
+	- } else {
+		.form-group(attributes)
+			label(for=name, class="col-md-2 control-label")= label
+			.col-sm-10
+				input(type=type, class="form-control", name=name, id=name, value=values[name] || "")
+	- }
+
+mixin field-label-md(type, label, name, id)
+	- if ((typeof(errors) !== "undefined") && (errors[name])) {
+		.form-group.has-error(attributes)
+			label(for=name, class="col-md-2 control-label")= label
+			.col-md-10
+				input(type=type, class="form-control", name=name, id=name, value=values[name] || "")
+				span.help-block #{errors[name].join(", ")}
+	- } else {
+		.form-group(attributes)
+			label(for=name, class="col-md-2 control-label")= label
+			.col-md-10
+				input(type=type, class="form-control", name=name, id=name, value=values[name] || "")
+	- }
+
+mixin field-label-lg(type, label, name, id)
+	- if ((typeof(errors) !== "undefined") && (errors[name])) {
+		.form-group(attributes)
+			label(for=name, class="col-md-2 control-label")= label
+			.col-lg-10.has-error
+				input(type=type, class="form-control", name=name, id=name, value=values[name] || "")
+				span.help-block #{errors[name].join(", ")}
+	- } else {
+		.form-group(attributes)
+			label(for=name, class="col-md-2 control-label")= label
+			.col-lg-10
+				input(type=type, class="form-control", name=name, id=name, value=values[name] || "")
+	- }
+
+mixin submit-label-md(label)
+	.form-group(attributes)
+		.col-md-offset-2.col-md-10
+			button(type="submit", class="btn btn-default")= label
+
+mixin submit(label)
+	.form-group(attributes)
+		button(type="submit", class="btn btn-default")= label
+
+mixin field(type, placeholder, name, id)
+	- if ((typeof(errors) !== "undefined") && (errors[name])) {
+		.form-group.has-error(attributes)
+			input(type=type, placeholder=placeholder, name=name, id=id, class="form-control", value=values[name] || "")
+			span.help-block #{errors[name].join(", ")}
+	- } else {
+		.form-group(attributes)
+			input(type=type, placeholder=placeholder, name=name, id=id, class="form-control", value=values[name] || "")
+
+	- }
+
+mixin checkbox(name, label)
+	.checkbox(attributes)
+		label
+			input(type="checkbox", name=name)
+			| #{ label }
